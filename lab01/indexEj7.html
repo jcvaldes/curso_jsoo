@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //Propiedades privadas
+
+    function Persona(dni, nombre) {
+        //var _edad = 0;
+
+        this.dni = dni;
+        this.nombre = nombre;
+        this._edad = 0;
+
+    }
+
+
+
+    var yo = new Persona('25333', 'Juan C');
+
+    console.log(yo);
+    console.log(yo.nombre);
+    console.log(yo.dni);
+    console.log(yo._edad);
+</script>
+</body>
+</html>

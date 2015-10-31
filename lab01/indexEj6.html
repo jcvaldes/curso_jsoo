@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //Propiedades publicas
+
+    function Persona() {
+        this.dni = '';
+        this.nombre = '';
+    }
+
+    var yo = new Persona();
+    var tu = new Persona();
+
+    yo.dni = '254544';
+    yo.nombre = 'Juan';
+
+    tu.dni = '222222';
+    tu.nombre = 'Miguel';
+
+    //notacion dinamica
+    tu['nombre'] = 'Joaquin';
+
+    console.log(yo);
+    console.log(tu);
+
+
+</script>
+</body>
+</html>

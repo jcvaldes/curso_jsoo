@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+       //Metodos publicos
+       function Persona(dni, nombre) {
+           //var _edad = 0;
+
+           this.dni = dni;
+           this.nombre = nombre;
+           this._edad = 0;
+
+           this.saludar =  function(nombre) {
+               console.log(this.nombre + ' te saluda ' + nombre);
+           }
+       }
+
+        var yo = new Persona('1111', 'Miguel');
+       yo.dni = '1223343';
+        yo.saludar('Juan C');
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //Metodos privados
+    function Persona(dni, nombre) {
+        var _edad = 0;
+
+        this.dni = dni;
+        this.nombre = nombre;
+
+        //Metodos que acceden a las propiedades  o metodos privados van aca
+        function envejecer() {
+            _edad++;
+        }
+
+        //Publico
+        Persona.prototype.crecer = function()
+        {
+            envejecer();
+        }
+    }
+
+    // No puedo acceder debido a que esta en otro nivel
+//    Persona.prototype.crecer = function()
+//    {
+//        envejecer();
+//    }
+
+    Persona.prototype.saludar = function(nombre)
+    {
+        console.log(this.nombre + ' te saluda ' + nombre);
+    }
+
+    var yo = new Persona('1111', 'Miguel');
+    console.log(yo._edad);
+
+    yo.crecer();
+    yo.saludar('Juan C');
+</script>
+</body>
+</html>
