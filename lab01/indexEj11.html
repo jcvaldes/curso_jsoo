@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //Metodos privilegiados
+
+    function Persona(dni, nombre) {
+        var _this = this;
+
+        var _edad = 0;
+        var edadParaSaludar = 1;
+
+        this.dni = dni;
+        this.nombre = nombre;
+
+        //Metodos que acceden a las propiedades  o metodos privados van aca
+        function envejecer() {
+            _edad++;
+            if(_edad >= edadParaSaludar)
+            {
+                //accedo a una funcion publica desde una privada
+                _this.saludar('');
+            }
+        }
+
+        //Metodo privilegiado es un metodo publico que accede a un metodo privado
+        Persona.prototype.crecer = function()
+        {
+            envejecer();
+        }
+    }
+
+
+    Persona.prototype.saludar = function(nombre)
+    {
+        console.log(this.nombre + ' te saluda ' + nombre);
+    }
+
+    var yo = new Persona('1111', 'Miguel');
+    console.log(yo._edad);
+
+    yo.crecer();
+
+</script>
+</body>
+</html>

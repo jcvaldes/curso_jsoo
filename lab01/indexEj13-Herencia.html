@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function DemoOOP()
+    {
+        this.userList = null; //Lista de personas / alumnos
+    }
+
+    DemoOOP.prototype.init = function()
+    {
+        var marcos;
+        var carlos;
+
+        this.userList = [];
+
+        carlos = new Person();
+        carlos.init('1', 'Carlos', 'González', '23');
+
+        marcos = new Student();
+        marcos.init('2', 'Marcos', 'Gonzalez', '30');
+        marcos.register(1);
+
+        this.userList.push( carlos );
+        this.userList.push( marcos );
+    };
+
+    DemoOOP.prototype.showUsers = function()
+    {
+        var i = 0;
+        var nUsers = this.userList.length;
+
+        for (i=0; i<nUsers; i++)
+        {
+            document.write( this.userList[i].getHTMLInfo() );
+            document.write('<p>- - - - - - - - - - - - - - - -</p>');
+        }
+    };
+
+
+    function Person() {
+        this.dni = '';
+        this.firstName = '';
+        this.lastName = '';
+        this.age = 0;
+    }
+
+    Person.prototype.init = function (dni, firsName, lastName, age) {
+        this.dni = dni;
+        this.firstName = firsName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    Person.prototype.getHTMLInfo = function () {
+        var info = '';
+        info += '<p><strong>DNI: </strong>'+this.dni+'</p>';
+        info += '<p><strong>NOMBRE: </strong>'+this.firstName+'</p>';
+        info += '<p><strong>APELLIDOS: </strong>'+this.lastName+'</p>';
+        info += '<p><strong>EDAD: </strong>'+this.age+'</p>';
+        return info;
+    }
+
+    function Student()
+    {
+        this.course = 0;
+        this.subjectList = null;
+    }
+
+    Student.prototype = new Person();               // heredamos de la clase Persona
+    Student.prototype.constructor = Student;        // corregimos el constructor de Student
+    Student.prototype.parent = Person.prototype;    // damos acceso al padre mediante la propiedad parent
+
+    // Añadimos métodos a los heredados de la clase padre
+    Student.prototype.register = function(course)
+    {
+        this.course = course;
+
+        switch (course)
+        {
+            case 1: this.subjectList = ['A', 'B', 'C'];     break;
+            case 2: this.subjectList = ['D', 'E', 'F', 'G']; break;
+            case 3: this.subjectList = ['H', 'I', 'J']; break;
+        }
+    };
+
+    //  Sobreescribimos un método existente en el padre
+    Student.prototype.getHTMLInfo = function()
+    {
+        var info = this.parent.getHTMLInfo.call(this); // Llamada a la versión del padre
+
+        if (this.course !== 0)
+        {
+            info += '<p><strong>CURSO: </strong>'+this.course+'</p>';
+            info += '<p><strong>ASIGNATURAS: </strong>'+this.subjectList.join('-')+'</p>';
+        }
+        else
+        {
+            info += '<p>No está matriculado.</p>';;
+        }
+
+        return info;
+    };
+
+    // App principal
+    var main = new DemoOOP();
+
+    window.onload = function () {
+        main.init();
+        main.showUsers();
+    };
+</script>
+</body>
+</html>

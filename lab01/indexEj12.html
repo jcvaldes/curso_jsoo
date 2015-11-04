@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //Metodos privilegiados
+
+    function Persona(dni, nombre) {
+
+        var _edad = 0;
+        var edadParaSaludar = 1;
+
+        this.dni = dni;
+        this.nombre = nombre;
+
+        //Metodos que acceden a las propiedades  o metodos privados van aca
+
+        //Metodos privilegiados
+        this.getEdad = function()
+        {
+            return _edad;
+        }
+
+        this.setEdad = function(value)
+        {
+            _edad = value;
+        }
+
+        this.getEdadParaSaludar = function() {
+            return edadParaSaludar;
+        }
+    }
+
+    Persona.prototype.saludar = function(nombre)
+    {
+        console.log(this.nombre + ' te saluda ' + nombre);
+    }
+
+    Persona.prototype.crecer = function()
+    {
+        this.setEdad(this.getEdad() + 1);
+
+        if(this.getEdad() >= this.getEdadParaSaludar()) {
+            this.saludar('');
+        }
+
+    }
+
+
+    var yo = new Persona('1111', 'Miguel');
+    console.log(yo._edad);
+
+    yo.saludar('Joaquin');
+    yo.crecer();
+
+</script>
+</body>
+</html>
